@@ -3,6 +3,9 @@ import cv2
 
 import pathlib
 
+import logging
+from util import setup_cli_logging
+
 
 def write_annotations(img, frame, video_labels):
 
@@ -66,6 +69,17 @@ def frame_annotations():
 
     capture.release()
 
+    logging.info("Captured frame test saved to tmp/frame")
+    logging.info("Annotated frame test saved to tmp/annframe")
+
+
+# tests ran with pytest client
+def tests_annotated_frame():
+    im = cv2.imread("tmp/frame.png")
+    im2 = cv2.imread("tmp/annframe.png")
+    assert im.size != 0 and im2.size != 0
+
 
 if __name__ == "__main__":
+    setup_cli_logging()
     frame_annotations()

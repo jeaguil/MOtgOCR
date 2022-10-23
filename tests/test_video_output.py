@@ -2,6 +2,9 @@ import cv2
 
 from test_frame_annotations import get_video_labels, write_annotations
 
+import logging
+from util import setup_cli_logging
+
 
 def video_output():
     VIDEO_CODEC = "mp4v"
@@ -27,6 +30,9 @@ def video_output():
     out.release()
     capture.release()
 
+    logging.info("Annotated video test saved to tmp/ann_out_test")
+
 
 if __name__ == "__main__":
+    setup_cli_logging()
     video_output()

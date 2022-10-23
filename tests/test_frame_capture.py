@@ -3,6 +3,9 @@ try:
 except ImportError as e:
     print(e)
 
+import logging
+from util import setup_cli_logging
+
 import matplotlib.pyplot as plt
 
 import pathlib
@@ -52,6 +55,7 @@ def frame_capture():
 
     plt.tight_layout()
     plt.savefig("tmp/gPYWXUtVaz")
+    logging.info("Frame capture test saved to tmp/gPYWXUtVaz")
     capture.release()
 
 
@@ -62,4 +66,6 @@ def test_frame_capture():
 
 
 if __name__ == "__main__":
+    setup_cli_logging()
+
     frame_capture()

@@ -2,6 +2,7 @@ __pycache__/
 .pytest_cache/
 *.pyc
 tmp/
+log/
 
 /bdd100k
 /mo-env
