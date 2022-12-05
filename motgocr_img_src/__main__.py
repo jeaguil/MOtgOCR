@@ -48,6 +48,7 @@ if __name__ == "__main__":
         os.mkdir(tmp)
 
     crds_dif_lst = []
+    no_detections = []
     for img in os.listdir(imgs_path):
         f = os.path.join(imgs_path, img)
         ret = cv2.imread(f)
@@ -64,6 +65,8 @@ if __name__ == "__main__":
         except IndexError:
             # index error if model did not find license plates.
             # image 1/1: 270x471 (no detections)
+            crds_dif_lst += [100.0]
+            no_detections += [str(img)]
             continue
 
         crds = (x1, y1, x2, y2) = (int(r[0] * f_x_shape), int(r[1] * f_y_shape),
@@ -90,3 +93,6 @@ if __name__ == "__main__":
 
     print("Custom yolov5 model finished with an average percent differnce of {:.2f}% between experimental coordinates and true coordinates.".format(
         sum(crds_dif_lst) / len(crds_dif_lst)))
+
+    print("Could not find license plates in the following images: {}".format(
+        no_detections))
